@@ -9,7 +9,9 @@ option(USE_MBEDTLS "Use mbedTLS for TLS connections." OFF)
 option(USE_GNUTLS "Use GnuTLS for TLS connections." OFF)
 option(USE_OPENSSL "Use OpenSSL for TLS connections." ON)
 
-project(vmecs VERSION 1.5.0 DESCRIPTION "vmecs is a proxy implementation written in C")
+project(vmecs)
+
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules")
 
 # set basic compile flags
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -fPIC -Wall -pedantic -Wno-address -Wno-unused-function")
@@ -26,36 +28,6 @@ if(BUILD_SHARED_LIBS)
     message("* Build with shared libs")
 else()
     message("* Build static version")
-endif()
-
-if (USE_MBEDTLS)
-    message("searching for MbedTLS library")
-    find_package(MbedTLS REQUIRED)
-    if (MbedTLS_FOUND)
-        message("Found mbedTLS library")
-    endif()
-    set(USE_GNUTLS OFF)
-    set(USE_OPENSSL OFF)
-endif()
-
-if (USE_GNUTLS)
-    message("searching for GnuTLS library")
-    find_package(GnuTLS REQUIRED)
-    if (GNUTLS_FOUND)
-        message("Found GnuTLS library")
-    endif()
-    set(USE_MBEDTLS OFF)
-    set(USE_OPENSSL OFF)
-endif()
-
-if (USE_OPENSSL)
-    message("searching for OpenSSL library")
-    find_package(OpenSSL REQUIRED)
-    if (OPENSSL_FOUND)
-        message("Found OpenSSL library")
-    endif()
-    set(USE_GNUTLS OFF)
-    set(USE_MBEDTLS OFF)
 endif()
 
 # Use GNU default dirs

@@ -1,7 +1,6 @@
 # app/test/vmess
 
 if(BUILD_SHARED_LIBS)
-    message("* Build with shared libs")
     add_exe_batch(vmess-client SHARED "client.c")
 else()
     add_exe_batch(vmess-client STATIC "client.c")
@@ -9,7 +8,6 @@ endif()
 target_link_libraries(vmess-client vmecs-crypto vmecs-proto pthread)
 
 if(BUILD_SHARED_LIBS)
-    message("* Build with shared libs")
     add_exe_batch(vmess-middle SHARED "middle.c")
 else()
     add_exe_batch(vmess-middle STATIC "middle.c")
@@ -17,7 +15,6 @@ endif()
 target_link_libraries(vmess-middle vmecs-crypto vmecs-proto pthread)
 
 if(BUILD_SHARED_LIBS)
-    message("* Build with shared libs")
     add_exe_batch(vmess-server SHARED "server.c")
 else()
     add_exe_batch(vmess-server STATIC "server.c")
